@@ -15,6 +15,7 @@ class ObjModel extends Model{
     super(props)
   }
   loaded(obj3d) {
+      console.log(obj3d);
       var bound_box = this.computeBoundingBox(obj3d);
       // debugger
       var front = bound_box.max;
