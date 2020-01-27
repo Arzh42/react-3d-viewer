@@ -46,19 +46,23 @@ class ObjModel extends Model{
       if (json_data) {
           obj_loader.parse(json_data,this.loaded);
       }
-    obj_loader.load(
-      // resource URL
-      src,
-      // called when resource is loaded
-        this.loaded
-      ,
-      // called when loading is in progresses
-      xhr =>{
-        this.props.onProgress && this.props.onProgress(xhr)
-        // console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+      else if (src) {
+          obj_loader.load(
+              // resource URL
+              src,
+              // called when resource is loaded
+              this.loaded
+              ,
+              // called when loading is in progresses
+              xhr =>{
+                  this.props.onProgress && this.props.onProgress(xhr)
+                  // console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+              }
+          );
       }
-    );
-
+      else {
+        return false;
+      }
   }
 }
 
