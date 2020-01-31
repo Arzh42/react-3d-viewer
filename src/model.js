@@ -13,9 +13,9 @@ var GlEment = {
   directionligth:{
     create({color,position,castShadow}={}){
 
-     
+
       var direction_light = new THREE.DirectionalLight( new THREE.Color(color), .95 );
-     
+
       direction_light.position.set( position.x,position.y,position.z );
       //direction_light.position.set( -30,30,30 );
      // debugger;
@@ -26,7 +26,7 @@ var GlEment = {
 
       return direction_light;
 
-      
+
     }
   }
   ,ambientlight:{
@@ -51,7 +51,7 @@ var computeBoundingBox = function(obj) {
 			if (!geometry.boundingBox) {
 				geometry.computeBoundingBox();
 			}
-			
+
 			var geometryBBox = geometry.boundingBox;
 			obj.updateMatrix();
 			geometryBBox.applyMatrix4(obj.matrix);
@@ -64,27 +64,27 @@ var computeBoundingBox = function(obj) {
 	else {
 		var i, len = obj.children.length;
 		var boundingBox = new THREE.Box3(new THREE.Vector3, new THREE.Vector3);
-		
+
 		for (i = 0; i < len; i++) {
 			var bbox = computeBoundingBox(obj.children[i]);
 			if ( bbox.min.x < boundingBox.min.x ) {
 				boundingBox.min.x = bbox.min.x;
 			}
-			
+
 			if ( bbox.max.x > boundingBox.max.x ) {
 				boundingBox.max.x = bbox.max.x;
 			}
 			if ( bbox.min.y < boundingBox.min.y ) {
 				boundingBox.min.y = bbox.min.y;
 			}
-			
+
 			if ( bbox.max.y > boundingBox.max.y ) {
 				boundingBox.max.y = bbox.max.y;
 			}
 			if ( bbox.min.z < boundingBox.min.z ) {
 				boundingBox.min.z = bbox.min.z;
 			}
-			
+
 			if ( bbox.max.z > boundingBox.max.z ) {
 				boundingBox.max.z = bbox.max.z;
 			}
@@ -133,16 +133,16 @@ class Model extends React.Component{
 
    // debugger
   }
- 
+
   render(){
 
     var {lights} = this.state;
     return (
-      <div  ref={node=>this.$container=node} data-loader={this.props.loader} 
+      <div  ref={node=>this.$container=node} data-loader={this.props.loader}
         style={this.style()}
       >
         {
-          
+
         }
       </div>
 
@@ -169,12 +169,12 @@ class Model extends React.Component{
     return false;
   }
 
- 
+
   componentDidUpdate(){
     if(!this.obj3d) return false
 
     var {src,background,width,height} = this.props;
-  
+
     // console.log(this.props.position);
 
     this.camera.aspect = width / height;
@@ -182,7 +182,7 @@ class Model extends React.Component{
     this.renderer.setSize( width, height );
 
     const {enableKeys,enableRotate,enableZoom,enabled} = this.props;
-    
+
     Object.assign(this.orbit_controls,{
       enableKeys
       ,enablePan : true
@@ -191,9 +191,9 @@ class Model extends React.Component{
       ,enabled
     })
 
-    
+
     if(typeof this.src!='undefined' && this.src!=src){
-      
+      console.log("update model");
       this.src = src
       this.remove3dModel();
       this.load3dModel();
@@ -204,11 +204,11 @@ class Model extends React.Component{
     this.lights = [];
 
     // console.log()
-    
+
     this.addLight('ambientlight',ambientlight.defaultProps);
 
     if(this.need_children_lights){
-      
+
 
       this.addChildrenLights();
 
@@ -216,10 +216,10 @@ class Model extends React.Component{
     }else{
 
       this.addLight('directionligth',directionligth.defaultProps);
-      
+
     }
 
-   
+
     // console.log(this.lights.length)
     // console.log('didupdate!',this.props)
 
@@ -254,8 +254,8 @@ class Model extends React.Component{
 
     let {position, rotation, scale} = this.props;
 
-    this.group.position.copy( 
-      new THREE.Vector3(position.x, position.y, position.z) 
+    this.group.position.copy(
+      new THREE.Vector3(position.x, position.y, position.z)
     )
     this.group.rotation.set(rotation.x,rotation.y,rotation.z)
     this.group.scale.set(scale.x,scale.y,scale.z)
@@ -268,7 +268,7 @@ class Model extends React.Component{
       this.renderer.render(this.scene,this.camera);
 
       if(this.obj3d){
-        
+
         if(!this.group.children.length){
           this.group.add(this.obj3d)
         }
@@ -276,8 +276,8 @@ class Model extends React.Component{
 
         let {position, rotation, scale} = this.props;
         // console.log(position)
-        this.group.position.copy( 
-          new THREE.Vector3(position.x, position.y, position.z) 
+        this.group.position.copy(
+          new THREE.Vector3(position.x, position.y, position.z)
         )
 
         this.group.rotation.set(rotation.x,rotation.y,rotation.z)
@@ -287,13 +287,13 @@ class Model extends React.Component{
 
     })
 
-   
-    
-    
-    
 
 
-  
+
+
+
+
+
   }
   initControl(){
 
@@ -311,7 +311,7 @@ class Model extends React.Component{
 
     //debugger;
     this.orbit_controls.update();
-    
+
     //debugger
 
 
@@ -322,7 +322,7 @@ class Model extends React.Component{
       this.scene.remove(this.obj3d);
 
     }
-    
+
   }
   load3dModel(){
     //..
@@ -338,7 +338,7 @@ class Model extends React.Component{
         if (!geometry.boundingBox) {
           geometry.computeBoundingBox();
         }
-        
+
         let geometryBBox = geometry.boundingBox;
         obj.updateMatrix();
         geometryBBox.applyMatrix4(obj.matrix);
@@ -351,27 +351,27 @@ class Model extends React.Component{
     else {
       var i, len = obj.children.length;
       var boundingBox = new THREE.Box3(new THREE.Vector3, new THREE.Vector3);
-      
+
       for (i = 0; i < len; i++) {
         let bbox = computeBoundingBox(obj.children[i]);
         if ( bbox.min.x < boundingBox.min.x ) {
           boundingBox.min.x = bbox.min.x;
         }
-        
+
         if ( bbox.max.x > boundingBox.max.x ) {
           boundingBox.max.x = bbox.max.x;
         }
         if ( bbox.min.y < boundingBox.min.y ) {
           boundingBox.min.y = bbox.min.y;
         }
-        
+
         if ( bbox.max.y > boundingBox.max.y ) {
           boundingBox.max.y = bbox.max.y;
         }
         if ( bbox.min.z < boundingBox.min.z ) {
           boundingBox.min.z = bbox.min.z;
         }
-        
+
         if ( bbox.max.z > boundingBox.max.z ) {
           boundingBox.max.z = bbox.max.z;
         }
@@ -388,13 +388,13 @@ class Model extends React.Component{
   createEnvironment(){
 
   }
-  
-  
+
+
   addLight(__constructor,props){
 
     if( !( /directionligth|ambientlight|spotlight/.test(__constructor)) ) return;
     var o = GlEment[__constructor].create(props);
-    
+
     this.scene.add(o);
 
     this.lights.push(o);
@@ -422,21 +422,21 @@ class Model extends React.Component{
   }
   createDefaultLight(){
 
-    
+
     // ambientlight
     // console.log(ambientlight)
     // debugger;
     this.addLight('ambientlight', ambientlight.defaultProps);
 
     if(this.need_children_lights){
-      
+
       //debugger;
 
       this.addChildrenLights();
     }else{
 
       this.addLight('directionligth',directionligth.defaultProps);
-      
+
     }
   }
 
