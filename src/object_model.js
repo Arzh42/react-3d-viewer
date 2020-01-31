@@ -18,9 +18,12 @@ class ObjectModel extends Model{
         var {src,texPath} = this.props;
 
         if(!src) return false
+
+        this.src = src;
         // instantiate a loader
         // load a resource
         var obj_loader = new THREE.ObjectLoader()
+
         obj_loader.load(
             // resource URL
             src,
