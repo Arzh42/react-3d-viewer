@@ -194,11 +194,12 @@ class Model extends React.Component{
 
     if(typeof this.src!='undefined' && this.src!=src){
 
-      this.src = src
+
       this.remove3dModel();
       this.load3dModel();
 
     }
+    this.src = src;
 
     this.lights.forEach((light)=> this.scene.remove(light));
     this.lights = [];
