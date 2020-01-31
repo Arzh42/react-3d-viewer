@@ -200,6 +200,7 @@ class Model extends React.Component{
 
     }
     this.src = src;
+    console.log(this.src);
 
     this.lights.forEach((light)=> this.scene.remove(light));
     this.lights = [];
