@@ -189,11 +189,11 @@ class Model extends React.Component{
       ,enableRotate
       ,enableZoom
       ,enabled
-    })
-
+    });
+    console.log("update model"+src+"   "+this.src);
 
     if(typeof this.src!='undefined' && this.src!=src){
-      console.log("update model");
+
       this.src = src
       this.remove3dModel();
       this.load3dModel();
