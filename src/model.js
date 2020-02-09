@@ -194,13 +194,12 @@ class Model extends React.Component{
 
     if(typeof this.src!='undefined' && this.src!=src){
 
-
+      console.log("reload");
       this.remove3dModel();
       this.load3dModel();
 
     }
     this.src = src;
-    console.log(this.src);
 
     this.lights.forEach((light)=> this.scene.remove(light));
     this.lights = [];
@@ -319,8 +318,9 @@ class Model extends React.Component{
 
   }
   remove3dModel(){
-    console.log(this.obj3d);
+    console.log("obj3d", this.obj3d);
     if(this.obj3d){
+      console.log("remove");
       this.scene.remove(this.obj3d);
 
     }
