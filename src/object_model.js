@@ -20,6 +20,7 @@ class ObjectModel extends Model{
         if(!src) return false
 
         this.src = src;
+        console.log(src);
         // instantiate a loader
         // load a resource
         var obj_loader = new THREE.ObjectLoader()
