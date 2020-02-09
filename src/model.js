@@ -319,7 +319,7 @@ class Model extends React.Component{
 
   }
   remove3dModel(){
-
+    console.log(this.obj3d);
     if(this.obj3d){
       this.scene.remove(this.obj3d);
 
